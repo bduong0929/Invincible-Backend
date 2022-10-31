@@ -2,6 +2,7 @@ package com.revature.invincible.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.revature.invincible.dtos.requests.NewClothingRequest;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -18,7 +19,7 @@ public class Clothing {
     private String name;
 
     @Column(name = "price", nullable = false)
-    private BigDecimal money;
+    private BigDecimal price;
 
     @ManyToOne
     @JsonBackReference
@@ -32,10 +33,10 @@ public class Clothing {
     public Clothing() {
     }
 
-    public Clothing(String id, String name, BigDecimal money, Product product, Set<ClothingSize> clothingSizes) {
+    public Clothing(String id, String name, BigDecimal price, Product product, Set<ClothingSize> clothingSizes) {
         this.id = id;
         this.name = name;
-        this.money = money;
+        this.price = price;
         this.product = product;
         this.clothingSizes = clothingSizes;
     }
@@ -56,12 +57,12 @@ public class Clothing {
         this.name = name;
     }
 
-    public BigDecimal getMoney() {
-        return money;
+    public BigDecimal getPrice() {
+        return price;
     }
 
-    public void setMoney(BigDecimal money) {
-        this.money = money;
+    public void setPrice(BigDecimal price) {
+        this.price = price;
     }
 
     public Product getProduct() {
@@ -82,12 +83,6 @@ public class Clothing {
 
     @Override
     public String toString() {
-        return "Clothing{" +
-                "id='" + id + '\'' +
-                ", name='" + name + '\'' +
-                ", money=" + money +
-                ", product=" + product +
-                ", clothingSizes=" + clothingSizes +
-                '}';
+        return "Clothing{" + "id='" + id + '\'' + ", name='" + name + '\'' + ", price=" + price + ", product=" + product + ", clothingSizes=" + clothingSizes + '}';
     }
 }

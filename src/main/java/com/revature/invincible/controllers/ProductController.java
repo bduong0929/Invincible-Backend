@@ -1,9 +1,13 @@
 package com.revature.invincible.controllers;
 
 import com.revature.invincible.dtos.requests.NewProductRequest;
+import com.revature.invincible.models.Product;
 import com.revature.invincible.services.ProductService;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/products")
@@ -19,5 +23,12 @@ public class ProductController {
     @PostMapping(consumes = "application/json")
     public void addNewProduct(@RequestBody NewProductRequest req) {
         productService.saveProduct(req);
+    }
+
+    @CrossOrigin
+    @ResponseStatus(HttpStatus.CREATED)
+    @GetMapping(produces = "application/json")
+    public List<Product> listAllProducts() {
+        return productService.getAllProducts();
     }
 }

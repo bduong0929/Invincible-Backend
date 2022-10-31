@@ -4,4 +4,4 @@
 
 ## Entity Relational Diagram
 
-<img src="./src/main/resources/erd.png" />
+<img src="./src/main/resources/invincible_erd.png" />

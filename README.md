@@ -3,4 +3,4 @@
 
 ## ERD
 
-<img src="./src/main/resources/erd.png"/>
+<img src="./src/main/resources/erd.pn"/>

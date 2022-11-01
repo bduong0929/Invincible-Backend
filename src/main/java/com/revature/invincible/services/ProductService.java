@@ -1,8 +1,9 @@
 package com.revature.invincible.services;
 
 import com.revature.invincible.dtos.requests.NewProductRequest;
-import com.revature.invincible.models.Product;
+import com.revature.invincible.entities.Product;
 import com.revature.invincible.repositories.ProductRepository;
+import com.revature.invincible.utils.custom_exceptions.InvalidProductException;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -19,10 +20,16 @@ public class ProductService {
     }
 
     public void saveProduct(NewProductRequest req) {
-        Product product = new Product(UUID.randomUUID().toString(), req);
+        List<Product> products = productRepo.findAll();
+
+        for (Product p : products) {
+            if (p.getName().equalsIgnoreCase(req.getName())) throw new InvalidProductException("The product you are trying to create already exist");
+        }
+
+        Product product = new Product(UUID.randomUUID().toString(), req.getName().substring(0, 1).toUpperCase() + req.getName().substring(1));
         productRepo.save(product);
     }
-    public List<Product> getAllProducts() {
+    public List<Product> findAllProducts() {
         return (List<Product>) productRepo.findAll();
     }
 }

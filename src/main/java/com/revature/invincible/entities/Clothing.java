@@ -1,12 +1,10 @@
-package com.revature.invincible.models;
+package com.revature.invincible.entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.revature.invincible.dtos.requests.NewClothingRequest;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -27,18 +25,25 @@ public class Clothing {
     private Product product;
 
     @JsonManagedReference
-    @OneToMany(mappedBy = "clothing", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    private Set<ClothingSize> clothingSizes;
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinTable(name = "clothing_size",
+            joinColumns = {
+                    @JoinColumn(name = "clothing_id", referencedColumnName = "id", nullable = false)
+            },
+            inverseJoinColumns = {
+                    @JoinColumn(name = "size_id", referencedColumnName = "id", nullable = false)
+            })
+    private Set<Size> sizes;
 
     public Clothing() {
     }
 
-    public Clothing(String id, String name, BigDecimal price, Product product, Set<ClothingSize> clothingSizes) {
+    public Clothing(String id, String name, BigDecimal price, Product product, Set<Size> sizes) {
         this.id = id;
         this.name = name;
         this.price = price;
         this.product = product;
-        this.clothingSizes = clothingSizes;
+        this.sizes = sizes;
     }
 
     public String getId() {
@@ -73,16 +78,11 @@ public class Clothing {
         this.product = product;
     }
 
-    public Set<ClothingSize> getClothingSizes() {
-        return clothingSizes;
+    public Set<Size> getSizes() {
+        return sizes;
     }
 
-    public void setClothingSizes(Set<ClothingSize> clothingSizes) {
-        this.clothingSizes = clothingSizes;
-    }
-
-    @Override
-    public String toString() {
-        return "Clothing{" + "id='" + id + '\'' + ", name='" + name + '\'' + ", price=" + price + ", product=" + product + ", clothingSizes=" + clothingSizes + '}';
+    public void setSizes(Set<Size> sizes) {
+        this.sizes = sizes;
     }
 }

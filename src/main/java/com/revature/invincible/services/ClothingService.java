@@ -1,11 +1,12 @@
 package com.revature.invincible.services;
 
 import com.revature.invincible.dtos.requests.NewClothingRequest;
-import com.revature.invincible.models.Clothing;
+import com.revature.invincible.entities.Clothing;
 import com.revature.invincible.repositories.ClothingRepository;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -19,5 +20,9 @@ public class ClothingService {
 
     public void saveClothing(NewClothingRequest req) {
         clothingRepo.save(UUID.randomUUID().toString(), req.getName(), req.getPrice(), req.getProduct_id());
+    }
+
+    public List<Clothing> findAllClothings() {
+        return (List<Clothing>) clothingRepo.findAll();
     }
 }

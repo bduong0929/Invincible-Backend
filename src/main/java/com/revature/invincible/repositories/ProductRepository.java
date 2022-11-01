@@ -1,9 +1,9 @@
 package com.revature.invincible.repositories;
 
-import com.revature.invincible.models.Product;
-import org.springframework.data.repository.CrudRepository;
+import com.revature.invincible.entities.Product;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ProductRepository extends CrudRepository<Product, String> {
+public interface ProductRepository extends JpaRepository<Product, String> {
 }

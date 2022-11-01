@@ -1,10 +1,10 @@
 package com.revature.invincible.controllers;
 
 import com.revature.invincible.dtos.requests.NewProductRequest;
-import com.revature.invincible.models.Product;
+import com.revature.invincible.entities.Product;
 import com.revature.invincible.services.ProductService;
+import com.revature.invincible.utils.custom_exceptions.InvalidProductException;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -26,9 +26,14 @@ public class ProductController {
     }
 
     @CrossOrigin
-    @ResponseStatus(HttpStatus.CREATED)
     @GetMapping(produces = "application/json")
     public List<Product> listAllProducts() {
-        return productService.getAllProducts();
+        return productService.findAllProducts();
+    }
+
+    @ExceptionHandler
+    @ResponseStatus(HttpStatus.CONFLICT)
+    public InvalidProductException handledInvalidProductException(InvalidProductException e) {
+        return e;
     }
 }

@@ -2,6 +2,7 @@ package com.revature.invincible.services;
 
 import com.revature.invincible.dtos.requests.NewClothingRequest;
 import com.revature.invincible.entities.Clothing;
+import com.revature.invincible.entities.Product;
 import com.revature.invincible.repositories.ClothingRepository;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +20,7 @@ public class ClothingService {
     }
 
     public void saveClothing(NewClothingRequest req) {
-        clothingRepo.save(UUID.randomUUID().toString(), req.getName(), req.getPrice(), req.getProduct_id());
+        clothingRepo.save(UUID.randomUUID().toString(), req.getName(), req.getPrice(), req.getImg(), req.getProduct_id());
     }
 
     public List<Clothing> findAllClothings() {

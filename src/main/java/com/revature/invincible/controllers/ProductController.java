@@ -1,6 +1,7 @@
 package com.revature.invincible.controllers;
 
 import com.revature.invincible.dtos.requests.NewProductRequest;
+import com.revature.invincible.entities.Clothing;
 import com.revature.invincible.entities.Product;
 import com.revature.invincible.services.ProductService;
 import com.revature.invincible.utils.custom_exceptions.InvalidProductException;
@@ -35,5 +36,11 @@ public class ProductController {
     @ResponseStatus(HttpStatus.CONFLICT)
     public InvalidProductException handledInvalidProductException(InvalidProductException e) {
         return e;
+    }
+
+    @CrossOrigin
+    @GetMapping(value = "/name", produces = "application/json")
+    public List<Product> getAllProductsByName(@RequestParam String name) {
+        return productService.findAllProductsByName(name);
     }
 }

@@ -27,6 +27,9 @@ public class Clothing {
     @Column(name = "price", nullable = false)
     private BigDecimal price;
 
+    @Column(name = "img", nullable = false)
+    private String img;
+
     @ManyToOne
     @JsonBackReference
     @JoinColumn(name = "product_id", nullable = false)

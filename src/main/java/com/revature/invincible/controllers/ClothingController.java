@@ -6,6 +6,7 @@ import com.revature.invincible.services.ClothingService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("products/clothings")
@@ -26,5 +27,11 @@ public class ClothingController {
     @GetMapping(produces = "application/json")
     public List<Clothing> getAllClothings() {
         return clothingService.findAllClothings();
+    }
+
+    @CrossOrigin
+    @GetMapping(value = "/id", produces = "application/json")
+    public Optional<Clothing> getClothingById(@RequestParam String id) {
+        return clothingService.findClothingById(id);
     }
 }
